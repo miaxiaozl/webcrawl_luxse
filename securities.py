@@ -18,7 +18,7 @@ service = ChromeService(executable_path=chrome_driver_path)
 driver = webdriver.Chrome(service=service, options=options)
 
 # URL of the website containing the tables
-url = 'https://www.luxse.com/issuer/DeutscheBank/23571'
+url = 'https://www.luxse.com/issuer/BNPParibasIssu/48266'
 
 # Load the page
 driver.get(url)
@@ -77,7 +77,7 @@ while True:
             EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.next'))
         )
         next_button.click()
-        time.sleep(5)  # Wait for the next page to load
+        time.sleep(10)  # Wait for the next page to load
     except:
         print("No more pages to navigate.")
         break
@@ -89,12 +89,12 @@ driver.quit()
 df = pd.DataFrame(all_rows, columns=headers)
 
 # Save the DataFrame to a CSV file
-csv_file = 'securities.csv'
+csv_file = 'bnp.csv'
 df.to_csv(csv_file, index=False)
 print(f"Data saved to {csv_file}")
 
 # Convert the CSV to Excel
-excel_file = 'securities.xlsx'
+excel_file = 'bnp.xlsx'
 df.to_excel(excel_file, index=False)
 print(f"{csv_file} has been converted to {excel_file}")
 
